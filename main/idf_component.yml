@@ -1,6 +1,7 @@
 ## IDF Component Manager Manifest File
 dependencies:
   espressif/keyboard_button: "*"
+  h2zero/esp-nimble-cpp: "*"
   espressif/esp-idf-cxx: "^1.0.0-beta"
   ## Required IDF version
   idf:

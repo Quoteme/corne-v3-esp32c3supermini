@@ -21,28 +21,21 @@ dependencies:
       registry_url: https://components.espressif.com/
       type: service
     version: 1.0.2-beta
-  espressif/keyboard_button:
-    component_hash: 66e3953901b2a1489a50b0c8df8a86eedc442139e6de5695263b724b1e24fd42
-    dependencies:
-    - name: idf
-      require: private
-      version: '>=5.0'
-    - name: espressif/cmake_utilities
-      registry_url: https://components.espressif.com
-      require: private
-      version: 0.*
+  h2zero/esp-nimble-cpp:
+    component_hash: 82f654989d6e7a82744e32af78fd796d02c545a1728f35d165f4dacd4fcc3663
+    dependencies: []
     source:
       registry_url: https://components.espressif.com/
       type: service
-    version: 1.0.0
+    version: 2.2.1
   idf:
     source:
       type: idf
     version: 5.3.1
 direct_dependencies:
 - espressif/esp-idf-cxx
-- espressif/keyboard_button
+- h2zero/esp-nimble-cpp
 - idf
-manifest_hash: 3121aa6682c7efb99834731281cd918bf46d8b42b1d7441eefede96359f83779
+manifest_hash: acc37e2e33472cc8361b74ca3521070aaf1264ec6b672325758848628ec75cbf
 target: esp32s3
 version: 2.0.0
