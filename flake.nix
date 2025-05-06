@@ -20,7 +20,8 @@
       in rec {
         devShells.default = with pkgs;
           mkShell {
-            buildInputs = [ esp-idf-full ];
+            buildInputs =
+              [ esp-idf-full cmake-language-server cmake-format cmake-lint ];
 
             # shellHook = ''
             #   source ${esp-idf-full}/export.sh
