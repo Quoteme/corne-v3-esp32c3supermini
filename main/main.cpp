@@ -18,4 +18,15 @@ extern "C" void app_main(void) {
   NimBLEDevice::init("ESP32-CORNE-V3");
   NimBLEServer *pServer = NimBLEDevice::createServer();
   NimBLEService *pService = pServer->createService("test-service");
+  NimBLECharacteristic *pCharacteristic =
+      pService->createCharacteristic("1234");
+
+  // --- Advertising ---
+
+  NimBLEAdvertising *pAdvertising =
+      NimBLEDevice::getAdvertising(); // create advertising instance
+  pAdvertising->addServiceUUID(
+      "test-service");                    // advertise the UUID of our service
+  pAdvertising->setName("Luca-Keyboard"); // advertise the device name
+  pAdvertising->start();                  // start advertising
 }
