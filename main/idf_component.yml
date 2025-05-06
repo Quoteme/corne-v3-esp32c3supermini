@@ -1,5 +1,6 @@
 ## IDF Component Manager Manifest File
 dependencies:
+  espressif/keyboard_button: "*"
   espressif/esp-idf-cxx: "^1.0.0-beta"
   ## Required IDF version
   idf:
