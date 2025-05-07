@@ -28,6 +28,8 @@
               openocd
             ];
 
+            OPENOCD_SCRIPTS = "${pkgs.openocd}/share/openocd/scripts";
+
             # shellHook = ''
             #   source ${esp-idf-full}/export.sh
             # '';
