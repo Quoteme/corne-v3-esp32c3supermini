@@ -25,10 +25,17 @@
               cmake-language-server
               cmake-format
               cmake-lint
-              openocd
+              (pkgs.writeShellScriptBin "debug-tui" # bash
+                ''
+                  #!/usr/bin/env bash
+                  idf.py openocd
+                  # https://github.com/kovidgoyal/kitty/issues/1613#issuecomment-2328139105
+                  TERM="xterm-256color" idf.py gdbtui
+                '')
             ];
 
             OPENOCD_SCRIPTS = "${pkgs.openocd}/share/openocd/scripts";
+            ESP_ROM_ELF_DIR = "${pkgs.openocd}";
 
             # shellHook = ''
             #   source ${esp-idf-full}/export.sh
