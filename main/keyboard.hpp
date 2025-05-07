@@ -24,10 +24,9 @@ public:
     if (keyboard_button_create(&cfg, &kbd_) != ESP_OK)
       ESP_LOGE(TAG, "Failed to create keyboard");
 
-    keyboard_btn_cb_config_t cb_cfg = {
-        .event = KBD_EVENT_PRESSED,
-        .callback = &Keyboard::on_key,
-    };
+    keyboard_btn_cb_config_t cb_cfg = {.event = KBD_EVENT_PRESSED,
+                                       .callback = &Keyboard::on_key,
+                                       .user_data = this};
     keyboard_button_register_cb(kbd_, cb_cfg, NULL);
 
     xTaskCreate(&Keyboard::task_entry, "kbd_task", 4096, this, 5, &task_);
