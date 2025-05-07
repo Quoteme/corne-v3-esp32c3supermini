@@ -1,4 +1,28 @@
 dependencies:
+  espp/format:
+    component_hash: 9ab5c4d5bdaa0b64553d6a447f9dfb041cdf9cc40e6eae4dba1ce6d16b433bad
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=5.0'
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    version: 0.21.0
+  espp/hid-rp:
+    component_hash: 29f7d5471124cf91c1256e1c2312f42327cc82e9acc0c3ddd496bd1b108023a4
+    dependencies:
+    - name: espp/format
+      registry_url: https://components.espressif.com
+      require: private
+      version: '>=0.21.0'
+    - name: idf
+      require: private
+      version: '>=5.0'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 0.21.0
   espressif/cmake_utilities:
     component_hash: 351350613ceafba240b761b4ea991e0f231ac7a9f59a9ee901f751bddc0bb18f
     dependencies:
@@ -47,10 +71,11 @@ dependencies:
       type: idf
     version: 5.3.1
 direct_dependencies:
+- espp/hid-rp
 - espressif/esp-idf-cxx
 - espressif/keyboard_button
 - h2zero/esp-nimble-cpp
 - idf
-manifest_hash: c3334df73177315924d1a25caa1804adaca3478b4cbfa43c66afe9b683a715fb
+manifest_hash: 809c8ae4805c1bf1a1bfecf00047973871208346e780e4a17376ef8053a29e72
 target: esp32s3
 version: 2.0.0

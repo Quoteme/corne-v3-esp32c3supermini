@@ -1,5 +1,7 @@
 #include "NimBLEDevice.h"
 #include "NimBLEHIDDevice.h"
+#include "hid/page/generic_desktop.hpp"
+#include "hid/rdf/descriptor.hpp"
 
 class ServerCallbacks : public NimBLEServerCallbacks {
   void onConnect(NimBLEServer *pServer, NimBLEConnInfo &connInfo) override {
@@ -24,6 +26,9 @@ class ServerCallbacks : public NimBLEServerCallbacks {
   }
 
 } serverCallbacks;
+
+using namespace hid::rdf;
+using namespace hid::page;
 
 class Connection {
 public:
@@ -52,4 +57,17 @@ public:
 
 private:
   std::string name;
+
+  // clang-format off
+  static constexpr auto hid_report = descriptor(
+    usage_page<generic_desktop>(),
+    usage(generic_desktop::KEYBOARD),
+    collection::application(
+      usage(generic_desktop::KEYBOARD)
+      // collection::physical(
+      //
+      // )
+    )
+  );
+  // clang-format on
 };
