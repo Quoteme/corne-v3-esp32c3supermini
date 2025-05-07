@@ -27,19 +27,21 @@ class ServerCallbacks : public NimBLEServerCallbacks {
 
 class Connection {
 public:
-  std::string name;
+  Connection(std::string name = "Luca-Keyboard") { this->name = name; }
 
-  Connection(std::string name = "Luca-Keyboard") {
+  void start() {
+    // --- Init ---
     NimBLEDevice::init(name);
     NimBLEDevice::setSecurityAuth(true, true, true);
     NimBLEServer *pServer = NimBLEDevice::createServer();
     pServer->setCallbacks(&serverCallbacks);
-    NimBLEService *pService = pServer->createService("test-service");
-    NimBLECharacteristic *pCharacteristic =
-        pService->createCharacteristic("1234");
+
+    // --- HID ---
+    NimBLEHIDDevice *pHID = new NimBLEHIDDevice(pServer);
+    pHID->setManufacturer("Luca Leon Happel");
+    // pHID->setReportMap()
 
     // --- Advertising ---
-
     NimBLEAdvertising *pAdvertising = pServer->getAdvertising();
     pAdvertising->addServiceUUID("test-service");
     pAdvertising->setName(name);
@@ -49,4 +51,5 @@ public:
   }
 
 private:
+  std::string name;
 };

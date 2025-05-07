@@ -14,5 +14,6 @@ extern "C" void app_main(void) {
   static Keyboard keyboard(output_gpios, input_gpios);
   // Code below this line in app_main will not be reached
   ESP_LOGI("main", "Starting esp32-corne-v3");
-  auto c = Connection();
+  static Connection connection("Luca-Keyboard");
+  connection.start();
 }
