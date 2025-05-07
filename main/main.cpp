@@ -17,6 +17,17 @@ class ServerCallbacks : public NimBLEServerCallbacks {
     printf("Client disconnected - start advertising\n");
     NimBLEDevice::startAdvertising();
   }
+
+  void onAuthenticationComplete(NimBLEConnInfo &connInfo) override {
+    if (!connInfo.isEncrypted()) {
+      NimBLEDevice::getServer()->disconnect(connInfo.getConnHandle());
+      printf("Encrypt connection failed - disconnecting client\n");
+      return;
+    }
+    printf("Secured connection to: %s\n",
+           connInfo.getAddress().toString().c_str());
+  }
+
 } serverCallbacks;
 ;
 
@@ -28,11 +39,7 @@ extern "C" void app_main(void) {
   // Code below this line in app_main will not be reached
   ESP_LOGI("main", "Starting esp32-corne-v3");
   NimBLEDevice::init("ESP32-CORNE-V3");
-  NimBLEDevice::setSecurityAuth(
-      /*BLE_SM_PAIR_AUTHREQ_BOND | BLE_SM_PAIR_AUTHREQ_MITM |*/
-      BLE_SM_PAIR_AUTHREQ_SC);
-  NimBLEDevice::setSecurityRespKey(0000);
-
+  NimBLEDevice::setSecurityAuth(true, true, true);
   NimBLEServer *pServer = NimBLEDevice::createServer();
   pServer->setCallbacks(&serverCallbacks);
   NimBLEService *pService = pServer->createService("test-service");
