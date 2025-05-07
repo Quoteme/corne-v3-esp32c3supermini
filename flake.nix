@@ -20,19 +20,8 @@
       in rec {
         devShells.default = with pkgs;
           mkShell {
-            buildInputs = [
-              esp-idf-full
-              cmake-language-server
-              cmake-format
-              cmake-lint
-              (pkgs.writeShellScriptBin "debug-tui" # bash
-                ''
-                  #!/usr/bin/env bash
-                  idf.py openocd
-                  # https://github.com/kovidgoyal/kitty/issues/1613#issuecomment-2328139105
-                  TERM="xterm-256color" idf.py gdbtui
-                '')
-            ];
+            buildInputs =
+              [ esp-idf-full cmake-language-server cmake-format cmake-lint ];
 
             OPENOCD_SCRIPTS = "${pkgs.openocd}/share/openocd/scripts";
             ESP_ROM_ELF_DIR = "${pkgs.openocd}";
